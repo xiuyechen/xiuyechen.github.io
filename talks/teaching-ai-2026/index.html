@@ -115,6 +115,11 @@
   }
   table.stack td.yes { color: var(--accent); }
   table.stack td.no { color: var(--muted); }
+  .fragment { opacity: 0; transition: opacity 0.3s ease; }
+  .fragment.visible { opacity: 1; }
+  .small table.stack { font-size: 1.05rem; }
+  .small table.stack th { font-size: 1.05rem; }
+  .small h1 { font-size: 2rem; }
   #progress {
     position: fixed; bottom: 0; left: 0;
     height: 3px; background: var(--accent);
@@ -175,16 +180,16 @@
   </div>
 </div>
 
-<div class="slide">
+<div class="slide fragments">
   <div class="inner">
     <h1>The Key Assignment: <code>prompt.txt</code></h1>
     <p><strong>After studying code with AI help, students write a specification:</strong></p>
-    <ul><li>Describe what the code does, in your own words</li><li>Describe the behavior of the demo</li><li>Use your spec as a prompt to <strong>regenerate</strong> the code</li><li>Compare the original and the AI version</li><li>Discuss at least <strong>1 notable difference</strong></li></ul>
+    <ul><li class="fragment">Describe what the code does, in your own words</li><li class="fragment">Describe the behavior of the demo</li><li class="fragment">Use your spec as a prompt to <strong>regenerate</strong> the code</li><li class="fragment">Compare the original and the AI version</li><li class="fragment">Discuss at least <strong>1 notable difference</strong></li></ul>
     <p class="note">If you recreated it successfully, your prompt is now a good abstraction of the code.</p>
   </div>
 </div>
 
-<div class="slide">
+<div class="slide small">
   <div class="inner">
     <h1>What They Built <span class="dim">(final projects)</span></h1>
     <table class="stack"><thead><tr><th>Domain</th><th>Projects</th><th>Techniques</th></tr></thead><tbody><tr><td>Finance / Economics</td><td>5</td><td>RAG, sentiment analysis, ensemble ML</td></tr><tr><td>Sports Analytics</td><td>3</td><td>XGBoost + SHAP, clustering, object detection</td></tr><tr><td>Food / Sustainability</td><td>2</td><td>Computer vision (YOLOv11), embeddings + RAG</td></tr><tr><td>Education Technology</td><td>2</td><td>Multi-agent LLM, local RAG</td></tr><tr><td>Career / Networking</td><td>2</td><td>RAG, multimodal analysis</td></tr><tr><td>Computational Biology</td><td>1</td><td>Fine-tuned LLM (410M params) on 570K cells</td></tr><tr><td>AI Fairness</td><td>1</td><td>Embedding analysis, hidden layer inspection</td></tr></tbody></table>
@@ -213,6 +218,14 @@
   </div>
 </div>
 
+<div class="slide center fragments">
+  <div class="inner">
+    <p class="big fragment">We&#x27;re at the very beginning of <strong>AI + education</strong>.</p>
+    <p class="big fragment">AI is extremely powerful, and it is here to stay.</p>
+    <p class="big fragment">I think of teaching as a prescription, so our students can <strong>build immunity under supervision</strong> for life-long learning.</p>
+  </div>
+</div>
+
 <div class="slide center">
   <div class="inner">
     <h1>Thank you</h1>
@@ -235,9 +248,21 @@ function show(n) {
   document.getElementById('counter').textContent =
     (current + 1) + ' / ' + slides.length;
 }
+function nextStep() {
+  const frags = slides[current].querySelectorAll('.fragment:not(.visible)');
+  if (frags.length > 0) { frags[0].classList.add('visible'); return; }
+  show(current + 1);
+}
+function prevStep() {
+  const frags = [...slides[current].querySelectorAll('.fragment.visible')];
+  if (frags.length > 0) { frags[frags.length - 1].classList.remove('visible'); return; }
+  show(current - 1);
+  const prev = [...slides[current].querySelectorAll('.fragment')];
+  prev.forEach(f => f.classList.add('visible'));
+}
 document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(current + 1); }
-  if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1); }
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextStep(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prevStep(); }
   if (e.key === 'Home') { e.preventDefault(); show(0); }
   if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
   if (e.key === 'f' || e.key === 'F') {
@@ -247,8 +272,8 @@ document.addEventListener('keydown', e => {
 });
 document.addEventListener('click', e => {
   if (e.target.closest('a')) return;
-  if (e.clientX > window.innerWidth / 2) show(current + 1);
-  else show(current - 1);
+  if (e.clientX > window.innerWidth / 2) nextStep();
+  else prevStep();
 });
 show(0);
 </script>

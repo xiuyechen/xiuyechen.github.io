@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPSC 7760 — Course Feedback Summary (Spring 2026)</title>
+<style>
+  :root {
+    --au-purple: #522D80;
+    --au-orange: #E87722;
+    --au-light: #f7f4fb;
+    --border: #e0d6ec;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--au-light);
+    color: #2a2a2a;
+    line-height: 1.6;
+    padding: 2rem 1rem;
+  }
+  .container { max-width: 860px; margin: 0 auto; }
+  header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 3px solid var(--au-purple);
+  }
+  header h1 {
+    color: var(--au-purple);
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+  header p {
+    color: #666;
+    margin-top: 0.3rem;
+    font-size: 0.95rem;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .stat-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.3rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(82,45,128,0.08);
+    border: 1px solid var(--border);
+  }
+  .stat-card .number {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--au-purple);
+  }
+  .stat-card .label {
+    font-size: 0.85rem;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .stars { color: var(--au-orange); font-size: 1.3rem; letter-spacing: 2px; }
+  section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.8rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(82,45,128,0.08);
+    border: 1px solid var(--border);
+  }
+  section h2 {
+    color: var(--au-purple);
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--au-orange);
+    display: inline-block;
+  }
+  .theme-list { list-style: none; padding: 0; }
+  .theme-list li {
+    padding: 0.6rem 0 0.6rem 1.6rem;
+    position: relative;
+    border-bottom: 1px solid #f0ecf5;
+  }
+  .theme-list li:last-child { border-bottom: none; }
+  .theme-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--au-orange);
+  }
+  blockquote {
+    background: var(--au-light);
+    border-left: 4px solid var(--au-orange);
+    padding: 0.8rem 1rem;
+    margin: 0.7rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #444;
+    font-size: 0.93rem;
+  }
+  .bar-chart { margin-top: 0.5rem; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+  }
+  .bar-label {
+    width: 30px;
+    text-align: right;
+    margin-right: 0.7rem;
+    font-weight: 600;
+    color: #555;
+  }
+  .bar-track {
+    flex: 1;
+    background: #f0ecf5;
+    border-radius: 6px;
+    height: 22px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--au-purple), var(--au-orange));
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    min-width: 28px;
+  }
+  .highlight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  @media (max-width: 600px) { .highlight-grid { grid-template-columns: 1fr; } }
+  .highlight-card {
+    background: var(--au-light);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid var(--border);
+  }
+  .highlight-card h3 {
+    font-size: 0.85rem;
+    color: var(--au-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.4rem;
+  }
+  footer {
+    text-align: center;
+    color: #999;
+    font-size: 0.8rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>CPSC 7760 — Course Feedback Summary</h1>
+  <p>Spring 2026 &middot; Combined from anonymous survey &amp; end-of-semester reflections</p>
+</header>
+
+<div class="stats">
+  <div class="stat-card">
+    <div class="number">4.1</div>
+    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+    <div class="label">Avg. Stimulation Rating</div>
+  </div>
+  <div class="stat-card">
+    <div class="number">91%</div>
+    <div class="label">Felt Comfortable Participating</div>
+  </div>
+  <div class="stat-card">
+    <div class="number">82%</div>
+    <div class="label">Topics Met Expectations</div>
+  </div>
+</div>
+
+<section>
+  <h2>Intellectual Stimulation (1&ndash;5)</h2>
+  <div class="bar-chart">
+    <div class="bar-row">
+      <span class="bar-label">5</span>
+      <div class="bar-track"><div class="bar-fill" style="width:100%">5</div></div>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">4</span>
+      <div class="bar-track"><div class="bar-fill" style="width:80%">4</div></div>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">3</span>
+      <div class="bar-track"><div class="bar-fill" style="width:20%">1</div></div>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">2</span>
+      <div class="bar-track"><div class="bar-fill" style="width:20%">1</div></div>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">1</span>
+      <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>What Students Loved</h2>
+  <ul class="theme-list">
+    <li><strong>Open, informal discussions</strong> — consistently cited as the single most valuable part of the course; off-topic tangents were welcomed and led to real perspective shifts</li>
+    <li><strong>Breadth of AI topics</strong> — exposure to diffusion models, recommendation systems, agentic AI, AI safety, and more gave students a much broader view of the field</li>
+    <li><strong>Outstanding guest speakers</strong> — industry and research guests brought practical perspectives that papers alone couldn't provide</li>
+    <li><strong>Approachable atmosphere</strong> — the relaxed tone made complex topics feel accessible rather than overwhelming</li>
+    <li><strong>Deeper research grounding</strong> — the paper-reading rotation pushed students to engage deeply with material rather than passively consuming it</li>
+    <li><strong>Interdisciplinary collaboration</strong> — working with School of Management students encouraged thinking beyond pure technical perspectives</li>
+    <li><strong>Hands-on AI workshops</strong> — the Agents Workshop (retrieval + API tool use) changed how students think about building AI systems, not just training models</li>
+  </ul>
+  <blockquote>"This course gave me a MUCH deeper grounding in AI research methods. I am incredibly grateful for that as I prepare to graduate."</blockquote>
+  <blockquote>"I appreciate the more lax approach staff took to this class, as it made overwhelming topics feel approachable. Instead of insisting we become experts, it gave us the opportunity to gather an introduction to nuanced topics and plant seeds for future curiosity."</blockquote>
+  <blockquote>"Before this course, I had never really used agentic AI. It changed how I think about AI applications a lot &mdash; not just as training models, but as building systems that can reason through real workflows."</blockquote>
+</section>
+
+<section>
+  <h2>Guest Speakers</h2>
+  <p>Students consistently highlighted guest sessions as among the most valuable parts of the course. Speakers from Realtor.com, Spotify, Yale SOM, and current PhD researchers brought practical perspectives that papers alone couldn't provide.</p>
+  <blockquote>"Hearing from industry experts gave us practical perspectives that we could not gain from reading academic papers alone."</blockquote>
+</section>
+
+<section>
+  <h2>Topics That Resonated</h2>
+  <ul class="theme-list">
+    <li><strong>AlphaGo deep dive</strong> — connected well to prior coursework and sparked genuine enthusiasm</li>
+    <li><strong>AI Safety &amp; Interpretability</strong> — the journal club on AI safety stood out; students want more accessible readings (e.g. blog posts alongside dense papers)</li>
+    <li><strong>Agentic AI &amp; tool use</strong> — the Agents Workshop was a paradigm shift for students who previously thought of AI as single-shot prediction</li>
+    <li><strong>Diffusion models &amp; music</strong> — Harsha's session on connecting technical methods to creative applications was a favorite</li>
+    <li><strong>Recommendation systems</strong> — real-world deployment challenges at scale resonated with students</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Parting Words</h2>
+  <blockquote>"I loved the class and learned way more than I expected!"</blockquote>
+  <blockquote>"If I were given the chance to attend school for one more semester, I would choose to come back again!"</blockquote>
+  <blockquote>"I'm definitely way more interested in going out to build things now with all my new knowledge."</blockquote>
+  <blockquote>"The overall structure of this course is excellent. Honestly, there is very little about this course that needs to be changed."</blockquote>
+</section>
+
+<footer>
+  CPSC 7760 &middot; Spring 2026 &middot; Compiled from anonymous survey &amp; end-of-semester reflections
+</footer>
+
+</div>
+</body>
+</html>

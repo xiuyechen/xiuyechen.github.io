@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teaching AI from Scratch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1a1a2e;
+    --text: #e8e8e8;
+    --muted: #8888a0;
+    --accent: #4ecdc4;
+    --accent2: #ff6b6b;
+    --font: 'Space Grotesk', system-ui, sans-serif;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+  .slide {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    padding: 8vh 10vw;
+  }
+  .slide.active { display: flex; }
+  .inner { max-width: 1000px; width: 100%; }
+  .slide.center { text-align: center; }
+  .slide.center .inner { text-align: center; }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.4rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+  .title h1 { font-size: 4rem; letter-spacing: 0.05em; }
+  .title .sub { font-size: 1.3rem; color: var(--muted); margin-top: 0.5rem; }
+  ul { list-style: none; font-size: 1.5rem; line-height: 2; }
+  ul li::before {
+    content: '';
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 1rem;
+    vertical-align: middle;
+  }
+  ul ul { margin-left: 2rem; font-size: 1.3rem; }
+  ul ul li::before { width: 6px; height: 6px; background: var(--muted); }
+  blockquote {
+    font-family: var(--font);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    border-left: 3px solid var(--accent);
+    padding-left: 1.5rem;
+  }
+  .attribution { font-size: 1.2rem; color: var(--muted); }
+  .note { font-size: 1.3rem; color: var(--accent); margin-top: 2rem; }
+  .big { font-size: 2rem; line-height: 1.6; }
+  p { font-size: 1.5rem; line-height: 1.8; }
+  p + p { margin-top: 1rem; }
+  .hi { color: var(--accent); }
+  .warm { color: var(--accent2); }
+  .dim { color: var(--muted); }
+  strong { color: var(--accent); font-weight: 600; }
+  .refs { font-size: 1.1rem; line-height: 2.2; }
+  .refs a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--muted); }
+  .refs a:hover { border-color: var(--accent); }
+  pre {
+    background: #0d0d1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    text-align: left;
+    margin: 1rem 0;
+  }
+  code { font-family: 'SF Mono', 'Fira Code', monospace; }
+  table.stack {
+    margin: 1rem auto;
+    font-size: 1.3rem;
+    border-collapse: collapse;
+    min-width: 700px;
+  }
+  table.stack th {
+    text-align: left;
+    padding: 0.6em 1.5em 0.6em 0;
+    color: var(--accent);
+    font-weight: 600;
+    font-family: var(--font-serif);
+    border-bottom: 2px solid var(--accent);
+  }
+  table.stack td {
+    padding: 0.5em 1.5em 0.5em 0;
+    border-bottom: 1px solid #333;
+  }
+  table.stack td.yes { color: var(--accent); }
+  table.stack td.no { color: var(--muted); }
+  #progress {
+    position: fixed; bottom: 0; left: 0;
+    height: 3px; background: var(--accent);
+    transition: width 0.3s ease; z-index: 100;
+  }
+  #counter {
+    position: fixed; bottom: 1rem; right: 1.5rem;
+    font-size: 0.9rem; color: var(--muted); z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<div class="slide title center active">
+  <div class="inner">
+    <h1>Teaching AI from Scratch</h1>
+    <div class="sub">CPSC 1710 · Introduction to AI Applications</div>
+    <div class="sub">Sue Chen · Neuroscience &amp; Computer Science</div>
+  </div>
+</div>
+
+<div class="slide center">
+  <div class="inner">
+    <img src="owl-1.jpeg" style="max-height:55vh;max-width:80%;border-radius:8px;margin:1rem auto;display:block;">
+    <p style="margin-top:1.5rem;color:var(--muted);">That&#x27;s more or less what we&#x27;re asking students to do with AI.</p>
+  </div>
+</div>
+
+<div class="slide center">
+  <div class="inner">
+    <h1>The Course</h1>
+    <p class="big">Week 1: <strong>vibe-code</strong> with AI, see what happens.</p>
+    <p class="big">Weeks 2–11: figure out how it actually works.</p>
+    <p style="margin-top:1.5rem;color:var(--muted);">Prereqs: one semester of coding <em>or</em> math.</p>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="inner">
+    <h1>The Arc</h1>
+    <table class="stack"><thead><tr><th>Phase</th><th>Weeks</th><th>What happens</th></tr></thead><tbody><tr><td><strong>1. Use</strong></td><td>1–2</td><td>Black box. &quot;Feel free to ask your AI assistant.&quot;</td></tr><tr><td><strong>2. Understand</strong></td><td>3–7</td><td>Glass box. Hand-compute. No AI on some tasks.</td></tr><tr><td><strong>3. Build</strong></td><td>8–11</td><td>Toolbox. Same tools, different understanding.</td></tr></tbody></table>
+    <p class="note">They use AI freely in 1 and 3. The difference is what they understand about it.</p>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="inner">
+    <h1>The homework arc</h1>
+    <table class="stack"><thead><tr><th>HW</th><th>Topic</th><th>AI policy</th></tr></thead><tbody><tr><td>1</td><td>Intro to DL</td><td class="yes">&quot;Feel free to ask your AI assistant&quot;</td></tr><tr><td>2</td><td>Text-to-Speech</td><td class="yes">AI encouraged</td></tr><tr><td>3</td><td>MNIST Deep Dive</td><td class="no">Open-book; AI for facts only</td></tr><tr><td>4</td><td>Mini Text Gen</td><td class="no">Mixed — hand-compute + code with AI</td></tr><tr><td>5</td><td>Build Your Own LM</td><td class="no">Mixed</td></tr><tr><td>6</td><td>Computer Vision</td><td class="no">Mixed</td></tr><tr><td>7</td><td>GenAI LLMs</td><td class="yes">&quot;Use any AI at your disposal&quot;</td></tr></tbody></table>
+  </div>
+</div>
+
+<div class="slide center">
+  <div class="inner">
+    <h1>The Tension</h1>
+    <blockquote>Homework 3 was easy to complete using AI but very difficult to understand theoretically.</blockquote>
+    <p style="margin-top:1.5rem;color:var(--muted);">— student week-4 reflection</p>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="inner">
+    <h1>The Key Assignment: <code>prompt.txt</code></h1>
+    <p><strong>After studying code with AI help, students write a specification:</strong></p>
+    <ul><li>Describe what the code does, in your own words</li><li>Describe the behavior of the demo</li><li>Use your spec as a prompt to <strong>regenerate</strong> the code</li><li>Compare the original and the AI version</li><li>Discuss at least <strong>1 notable difference</strong></li></ul>
+    <p class="note">If you recreated it successfully, your prompt is now a good abstraction of the code.</p>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="inner">
+    <h1>What They Built <span class="dim">(final projects)</span></h1>
+    <table class="stack"><thead><tr><th>Domain</th><th>Projects</th><th>Techniques</th></tr></thead><tbody><tr><td>Finance / Economics</td><td>5</td><td>RAG, sentiment analysis, ensemble ML</td></tr><tr><td>Sports Analytics</td><td>3</td><td>XGBoost + SHAP, clustering, object detection</td></tr><tr><td>Food / Sustainability</td><td>2</td><td>Computer vision (YOLOv11), embeddings + RAG</td></tr><tr><td>Education Technology</td><td>2</td><td>Multi-agent LLM, local RAG</td></tr><tr><td>Career / Networking</td><td>2</td><td>RAG, multimodal analysis</td></tr><tr><td>Computational Biology</td><td>1</td><td>Fine-tuned LLM (410M params) on 570K cells</td></tr><tr><td>AI Fairness</td><td>1</td><td>Embedding analysis, hidden layer inspection</td></tr></tbody></table>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="inner">
+    <h1>What They Took Away</h1>
+    <blockquote>Before this class, I didn&#x27;t realize that LLMs are basically just a ton of mathematical equations doing next word prediction. I thought there was a lot more &#x27;magic&#x27; to it.</blockquote>
+    <p style="margin-top:1.5rem;color:var(--muted);">— demystification</p>
+  </div>
+</div>
+
+<div class="slide center">
+  <div class="inner">
+    <blockquote>I do not have an engineer background but I feel that I can communicate with them now.</blockquote>
+    <p style="margin-top:1.5rem;color:var(--muted);">— technical agency</p>
+  </div>
+</div>
+
+<div class="slide center">
+  <div class="inner">
+    <blockquote>The biggest thing I learned from this class that surprised me was the unraveling of my dependence on AI. When I allowed AI to completely take over I was frustrated by the &#x27;slop&#x27; effect.</blockquote>
+    <p style="margin-top:1.5rem;color:var(--muted);">— trust calibration</p>
+  </div>
+</div>
+
+<div class="slide center">
+  <div class="inner">
+    <h1>Thank you</h1>
+    <div class="sub">sue.chen@yale.edu</div>
+  </div>
+</div>
+
+<div id="progress"></div>
+<div id="counter"></div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+function show(n) {
+  slides[current].classList.remove('active');
+  current = Math.max(0, Math.min(n, slides.length - 1));
+  slides[current].classList.add('active');
+  document.getElementById('progress').style.width =
+    ((current / (slides.length - 1)) * 100) + '%';
+  document.getElementById('counter').textContent =
+    (current + 1) + ' / ' + slides.length;
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1); }
+  if (e.key === 'Home') { e.preventDefault(); show(0); }
+  if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+});
+document.addEventListener('click', e => {
+  if (e.target.closest('a')) return;
+  if (e.clientX > window.innerWidth / 2) show(current + 1);
+  else show(current - 1);
+});
+show(0);
+</script>
+</body>
+</html>

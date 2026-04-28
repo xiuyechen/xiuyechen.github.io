@@ -46,6 +46,7 @@
     color: var(--accent);
     line-height: 1.2;
   }
+  h1 code { font-size: 0.85em; }
   .title h1 { font-size: 4rem; letter-spacing: 0.05em; }
   .title .sub { font-size: 1.3rem; color: var(--muted); margin-top: 0.5rem; }
   ul { list-style: none; font-size: 1.5rem; line-height: 2; }
@@ -80,7 +81,7 @@
   .warm { color: var(--accent2); }
   .dim { color: var(--muted); }
   strong { color: var(--accent); font-weight: 600; }
-  .refs { font-size: 1.1rem; line-height: 2.2; }
+  .refs { font-size: 0.85rem; line-height: 1.8; color: var(--muted); margin-top: 2rem; }
   .refs a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--muted); }
   .refs a:hover { border-color: var(--accent); }
   pre {
@@ -182,10 +183,11 @@
 
 <div class="slide fragments">
   <div class="inner">
-    <h1>The Key Assignment: <code>prompt.txt</code></h1>
+    <h1>The key assignment: prompt.txt</h1>
     <p><strong>After studying code with AI help, students write a specification:</strong></p>
     <ul><li class="fragment">Describe what the code does, in your own words</li><li class="fragment">Describe the behavior of the demo</li><li class="fragment">Use your spec as a prompt to <strong>regenerate</strong> the code</li><li class="fragment">Compare the original and the AI version</li><li class="fragment">Discuss at least <strong>1 notable difference</strong></li></ul>
-    <p class="note">If you recreated it successfully, your prompt is now a good abstraction of the code.</p>
+    <p class="note fragment">If you recreated it successfully, your prompt is now a good abstraction of the code.</p>
+    <div class="refs fragment"><p>poorvucenter.yale.edu/resource/ai-prompting-to-test-code-comprehension</p></div>
   </div>
 </div>
 
@@ -256,6 +258,7 @@ function nextStep() {
 function prevStep() {
   const frags = [...slides[current].querySelectorAll('.fragment.visible')];
   if (frags.length > 0) { frags[frags.length - 1].classList.remove('visible'); return; }
+  if (current === 0) return;
   show(current - 1);
   const prev = [...slides[current].querySelectorAll('.fragment')];
   prev.forEach(f => f.classList.add('visible'));
